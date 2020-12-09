@@ -1,0 +1,1 @@
+web: uvicorn Sprint_2.main:api --host=0.0.0.0 --port=${PORT:-5000}
