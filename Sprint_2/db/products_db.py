@@ -78,3 +78,11 @@ def create_product(product:ProductInDB):
         database_products[product.Nombre] = product
         return True
     
+def update_product(product_in_db: ProductInDB):
+    database_products[product_in_db.Nombre] = product_in_db
+    return product_in_db
+
+def obtain_products():
+    return database_products
+
+    

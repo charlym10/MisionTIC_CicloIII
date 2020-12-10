@@ -1,6 +1,6 @@
 
 from db.products_db import ProductInDB
-from db.products_db import get_product, create_product
+from db.products_db import get_product, create_product,obtain_products, update_product
 from models.product_models import ProductOut, ProductCant
 
 import datetime
@@ -8,12 +8,14 @@ from fastapi import FastAPI, HTTPException
 
 api = FastAPI()
 
+#Bienvenida
 @api.get("/")
 async def home():
     return {"message":"Bienvenido"}
 
+#Obtener resumen del producto (Nombre y precio)
 @api.get("/user/producto/{Nombre}")
-async def get_product_char(Nombre: str):
+async def resumen_producto(Nombre: str):
 
     product_in_db = get_product(Nombre)
     if product_in_db == None:
@@ -23,12 +25,8 @@ async def get_product_char(Nombre: str):
 
     return  product_out
 
+#Creación de productos
 @api.post("/items/")
-# async def crear_productos(item:ProductInDB):
-#     create_product(item.Nombre, item.Categoría, item.Precio,
-#                    item.Unidad, item.Proveedor)
-#     return  {"Ingresado": True}
-
 
 async def crear_productos(product:ProductInDB):
     operacion_exitosa=create_product(product)
@@ -37,9 +35,9 @@ async def crear_productos(product:ProductInDB):
     else:
         raise HTTPException(status_code=400,detail='ya creado')
         
-
+#Obtener nombre y cantidad disponible
 @api.get("/user/cantidad/{Nombre}")
-async def get_product_cant(Nombre: str):
+async def obtener_cantidad(Nombre: str):
 
     product_in_db = get_product(Nombre)
     if product_in_db == None:
@@ -48,3 +46,20 @@ async def get_product_cant(Nombre: str):
     product_cant = ProductCant(**product_in_db.dict())
 
     return  product_cant
+
+#Actualizar
+    
+@api.put("/items/actualizacion")
+
+async def actualizar_productos(product:ProductInDB):
+        actualizacion_exitosa=update_product(product)
+        if actualizacion_exitosa:
+            return {"Articulo actualizado":True}
+        else:
+            raise HTTPException(status_code=400,detail='No se ha podido actualizar')
+
+#Visualizar completo
+            
+@api.get("/productos")
+async def lista_productos():
+    return obtain_products()
