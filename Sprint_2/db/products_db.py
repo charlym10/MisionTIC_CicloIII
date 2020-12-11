@@ -64,6 +64,8 @@ database_products = {
     
 }
 
+
+
 #Tercer bloque:
 def get_product(Nombre: str):
     if Nombre in database_products.keys():

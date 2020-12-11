@@ -1,7 +1,7 @@
 
 from db.products_db import ProductInDB
 from db.products_db import get_product, create_product,obtain_products, update_product
-from models.product_models import ProductOut, ProductCant
+from models.product_models import ProductOut, ProductCant,ComProd, create_comment
 
 import datetime
 from fastapi import FastAPI, HTTPException
@@ -63,3 +63,14 @@ async def actualizar_productos(product:ProductInDB):
 @api.get("/productos")
 async def lista_productos():
     return obtain_products()
+
+
+#Creación de comentarios
+@api.post("/comentarios/")
+
+async def crear_comentarios(items:ComProd):
+    operacion_exitosa=create_comment(items)
+    if operacion_exitosa:
+        return {"Comentario creado": True}
+    else:
+        raise HTTPException(status_code=400,detail='Ya creó su comentario')
