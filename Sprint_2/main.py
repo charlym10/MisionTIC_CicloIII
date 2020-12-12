@@ -1,6 +1,8 @@
 
 from db.products_db import ProductInDB
+from db.users_db import UsersInDB
 from db.products_db import get_product, create_product,obtain_products, update_product
+from db.users_db import create_users, update_user, modify_user
 from models.product_models import ProductOut, ProductCant,ComProd, create_comment
 
 import datetime
@@ -34,6 +36,18 @@ async def crear_productos(product:ProductInDB):
         return {"Ingresado": True}
     else:
         raise HTTPException(status_code=400,detail='ya creado')
+
+#Creación de usuarios
+@api.post("/usuarios/")
+
+async def crear_usuarios(user:UsersInDB):
+    operacion_exitosa=create_users(user)
+    if operacion_exitosa:
+        return {"Ingresado": True}
+    else:
+        raise HTTPException(status_code=400,detail='ya creado')
+
+
         
 #Obtener nombre y cantidad disponible
 @api.get("/user/cantidad/{Nombre}")
@@ -57,6 +71,28 @@ async def actualizar_productos(product:ProductInDB):
             return {"Articulo actualizado":True}
         else:
             raise HTTPException(status_code=400,detail='No se ha podido actualizar')
+
+
+#Actualizar usuarios
+    
+@api.put("/usuarios/actualizacion")
+
+async def actualizar_usuarios(user:UsersInDB):
+        actualizacion_exitosa=update_user(user)
+        if actualizacion_exitosa:
+            return {"usuario actualizado":True}
+        else:
+            raise HTTPException(status_code=400,detail='No se ha podido actualizar')
+
+@api.put("/usuarios/actualizacion")
+
+async def modificar_usuarios(user:UsersInDB):
+        actualizacion_exitosa=modify_user(user)
+        if actualizacion_exitosa:
+            return {"Usuario modificado":True}
+        else:
+            raise HTTPException(status_code=400,detail='No se ha podido modificar')
+
 
 #Visualizar completo
             
