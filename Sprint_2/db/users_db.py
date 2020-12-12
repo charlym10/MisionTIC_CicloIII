@@ -35,10 +35,12 @@ def create_user(user:UsersInDB):
         database_users[user.usuario] = user
         return True
 
-def update_product(users_in_db: UsersInDB):
+def update_user(users_in_db: UsersInDB):
     database_users[users_in_db.Nombre] = users_in_db
     return users_in_db
 
 def modify_user(users_in_db: UsersInDB):
     database_users[users_in_db.Nombre] = users_in_db
     return users_in_db
+
+#Prueba
