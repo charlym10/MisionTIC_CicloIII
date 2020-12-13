@@ -1,6 +1,7 @@
 
 from typing import Dict
 from pydantic import BaseModel
+
 class UsersInDB(BaseModel): #Public class UserInDB exends BaseModel
     Usuario: str
     Nombre: str
@@ -29,18 +30,27 @@ database_users = {
 }
 
 def create_user(user:UsersInDB):
-    if user.usuario in database_users:
+    if user.Usuario in database_users.keys():
         return False
     else:
-        database_users[user.usuario] = user
+        elemento = {
+            user.Usuario: user
+        }
+        
+        database_users.update(elemento)
+        
         return True
 
 def update_user(users_in_db: UsersInDB):
-    database_users[users_in_db.Nombre] = users_in_db
-    return users_in_db
-
-def modify_user(users_in_db: UsersInDB):
-    database_users[users_in_db.Nombre] = users_in_db
+    if users_in_db.Usuario in database_users.keys():
+        elemento = {
+            users_in_db.Usuario: users_in_db
+        }
+        
+        database_users.update(elemento)
+    else:
+        return False
+    
     return users_in_db
 
 #Prueba
