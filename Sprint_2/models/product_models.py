@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Dict
-from db.products_db import database_products
+from ..db.products_db import database_products
 
 class ProductOut(BaseModel):
     Nombre: str
