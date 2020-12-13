@@ -1,8 +1,8 @@
-from db.products_db import ProductInDB, get_product, create_product,obtain_products, update_product
-from db.users_db import UsersInDB, create_user, update_user
-from db.comments_db import create_comment
-from models.product_models import ProductOut, ProductCant
-from models.comment_models import ComProdIn
+from .db.products_db import ProductInDB, get_product, create_product,obtain_products, update_product
+from .db.users_db import UsersInDB, create_user, update_user
+from .db.comments_db import create_comment
+from .models.product_models import ProductOut, ProductCant
+from .models.comment_models import ComProdIn
 from fastapi import FastAPI, HTTPException
 
 api = FastAPI()

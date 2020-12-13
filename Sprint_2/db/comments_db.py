@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from typing import Dict
-from db.products_db import database_products
+from .products_db import database_products
 
 class ComProd(BaseModel):
     IdProducto: str #Nombre del producto
